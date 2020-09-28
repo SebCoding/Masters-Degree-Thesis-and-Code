@@ -1,8 +1,0 @@
-
---This line, and those below, will be ignored--
-
-M    src/libsablevm/method_inlining.c
-M    src/libsablevm/method_profiling.c
-M    src/libsablevm/method_inlining_debug.c
-M    src/libsablevm/types.h
-M    src/libsablevm/instructions.m4.c
