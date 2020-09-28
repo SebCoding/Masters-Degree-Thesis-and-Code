@@ -1,0 +1,155 @@
+Dear [contributor],
+
+Thank you for your contribution!  However, before accepting your
+contribution, we must clear up some legal issues.
+
+In short, in order for us to accept your contribution, you have to
+license your contribution to us as described in the policy below,
+
+We ask you to confirm individually each of the 5 rules of the policy.
+As you will see, our policy is pretty straight forward, as we do not
+request copyright assignment, nor signed paper work.  Yet, we do keep
+an electronic trail of all license agreements.
+
+So, below each of the 5 points of the policy, we ask that you state
+your agreement.  To simplify your work, we have provided explicit
+templates between brackets [].  In your reply to this message, please
+keep intact the text of the policy and replace the "[...]"  templates
+with your statements.
+
+If, for any reason, you do not fulfill the requirements (not
+clean-room, not copyright holder, do not agree to some other
+requirements), you should not fill this form.  You should, instead,
+reply to this message and tell us about the problem.
+
+
+---
+
+Sable-UQAM Contribution Policy 2.0
+==================================
+
+This document outlines the policy on contributions to Sable-UQAM
+projects.
+
+In the text below, "Sable-UQAM projects" means the whole software
+project collection, including SableVM, SableCC, and other software
+projects managed by the project.
+
+In order to accept your contribution, the Sable-UQAM Research Group
+requires that you confirm the following:
+
+1- You have maintained a "clean-room" status with respect to all work
+you contribute to Sable-UQAM projects.
+
+ Explanations:
+
+ You should not have had access to confidential material under terms
+ and conditions that preclude contributing to the development of
+ Sable-UQAM projects.  Having agreed to the Sun community source
+ license (SCSL) or any similar non-disclosure agreement, for example,
+ would be such a situation.
+
+[In your reply, you should remove this template and state here: "I
+have maintained clean-room status."]
+
+2- You ARE the copyright holder of all work you contribute to the
+project.
+
+ Explanations:
+
+ Your university or your employer (if you have one) might be the real
+ copyright holder, if you are paid to do the work or if your
+ university got you to sign a document accepting a school policy that
+ all student programs are the property of the university.
+
+ You must be the copyright holder on code you contribute.  If you wish
+ to contribute code that you have written but for which you are not
+ the sole copyright holder, then arrangements with all the copyright
+ holders must take place before you are allowed to contribute this
+ work.
+
+ You are not allowed contribute any code for which you are not the
+ copyright holder, even if that code is under a compatible license.
+ If you need to contribute code that depends on a third-party library
+ under compatible license, then you must take arrangement with us
+ first.
+
+[In your reply, you should remove this template and state here: "I am
+the author and the copyright holder of all work I contribute to the
+project."]
+
+3- You confirm that you license all work you contribute to the project
+   under the terms of the Apache License 2.0, or under the license
+   terms of the module you are contributing to, if different.
+
+ Explanations:
+
+ Copyright assignment from a contributor is not asked for.  A
+ consequence of this policy is that the contributor remains the
+ copyright holder on the code he himself writes, and can thus license
+ it separately to other parties under any other license.
+
+[In your reply, you should remove this template and state here: "I do
+licence my work under the Apache License 2.0."]
+
+
+4- You give the Sable-UQAM Research Group the right to make changes
+and add clarifications to the license terms of your contributed work.
+Any change will be made with the objective of ensuring that:
+
+   (a) it is possible to develop proprietary derivative works, and
+
+   (b) the work qualifies as free software, as defined by the Free
+   Software Foundation, by providing users the four kinds of freedom
+   outlined at http://www.gnu.org/philosophy/free-sw.html, and
+
+   (c) the work qualifies as free software according to the Debian
+   Free Software Guidelines (DFSG) at
+   http://www.debian.org/social_contract#guidelines.
+
+ Explanations:
+
+ Free and open source software licenses evolve over time.  It is
+ likely that new versions of the Apache License will be written.  We
+ ask for your permission to change the license terms so that we do not
+ have to contact you, years from now, to use newer licenses.  Yet, for
+ protecting the freedom of you contributed code, we put clear
+ restrictions on the kind of license terms we are allowed to chose.
+
+[In your reply, you should remove this template and state here: "I do
+give this permission."]
+
+5- You agree to these terms for ALL works you contribute to the
+project.
+
+ Explanations:
+
+ If we give you an account in our code repository, these terms apply
+ to all code you add into the repository, whether the code is part of
+ the main source tree of Sable-UQAM projects or just a directory in
+ your sandbox.  Of course, if you do not wish to work under these
+ terms, there is no obligation for you to use the repository or to
+ contribute your work.
+
+ If you have a sandbox in the code repository, you may not add papers,
+ reports, and theses to your sandbox.  Mainly, your sandbox is a
+ publicly accessible place, with Apache License 2.0 stuff in it.
+ Please do not put any binaries into the repository.  However,
+ technical notes and documents that serve as project documentation
+ must be licensed under the terms of the Apache License 2.0 and put in
+ your sandbox (in source form), so that they can be modified to
+ reflect changes as the project matures.
+
+[In your reply, you should remove this template and state here: "I do
+agree to these terms for all my past, current and future
+contributions."]
+
+---
+
+
+We do apologize for asking this additional effort from you.
+Fortunately, this only needs to happen once.
+
+Regards,
+
+[name]

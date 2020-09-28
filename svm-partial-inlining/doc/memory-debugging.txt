@@ -1,0 +1,84 @@
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * This source file is part of SableVM.                            *
+ *                                                                 *
+ * See the file "LICENSE" for the copyright information and for    *
+ * the terms and conditions for copying, distribution and          *
+ * modification of this source file.                               *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+*** SableVM information about the MEMORY_DEBUGGING mode ***
+
+Description
+-----------
+
+Enabling the --enable-memory-debugging option in the configuration step prior
+to compilation integrates to SableVM a mecanism to detect memory leaks.
+
+
+Usage
+-----
+
+The use of this feature is very simple, just run SableVM and a file named
+"memory_debug_results" contaning the results of the analysis will be created
+in the current directory.
+
+
+The "memory_debug_results" file
+------------------------------- 
+
+This file is structured as follows. The first part is a list of all memory
+leaks detected. The leaks are described as follows using 7 columns.
+
+column 1: Operation type (ex: calloc, malloc, ...)
+column 2: Function name where the allocation was done
+column 3: File name where the function resides
+column 4: The line number in the file where the allocation was done
+column 5: Number of bytes allocated
+column 6: Pointer value before the operation
+column 7: Pointer value after the operation
+
+Each line in the file is associated to a memory allocation that was never 
+freed. At the end of the file is given statistics on memory allocations.
+
+"memory_debug_results" example:
+-------------------------------
+
+.
+.
+.
+calloc  _svmh_new_native_global               global_refs.c  39    12  (nil) 0x816c140   
+malloc  _svmf_initialize_instruction_indices  prepare_code.c 40    76  (nil) 0x816c520   
+calloc  _svmf_initialize_instructions         prepare_code.c 207   680 (nil) 0x816cb78   
+calloc  _svmf_compute_stack_gc_maps           prepare_code.c 1125  36  (nil) 0x816c298   
+calloc  _svmf_compute_stack_gc_maps           prepare_code.c 1141  48  (nil) 0x816cac0   
+calloc  _svmh_copy_stack_and_local_map        prepare_code.c 850   36  (nil) 0x816c9e0   
+
+13650 unfreed pointers indentified
+allocation count: 100296  free count: 86646
+13.6% of allocations unfreed
+
+memory allocated: 799774530 bytes
+unfreed memory:    24311460 bytes
+freed memory:     775463070 bytes
+3.0% of allocated memory unfreed
+
+
+Limitations
+-----------
+
+If no memory leaks are detected by the system, this does not mean that the 
+SableVM code does contains memory leaks, it only means that no leaks have 
+occured during the execution. This debugging mode only monitors the allocations
+done during execution and does not provide a static analysis of the SableVM 
+source code to detect potential leaks.
+
+The results in the 'memory_debug_results" file will be consistent only if 
+SableVM terminates normally (without seg faulting).
+
+Note
+----
+
+It is impossible to get 100% of allocated memory freed at the termination of SableVM if the 
+Java program you are running is exiting with something like: System.exit(), since SableVM 
+does not call the JNI_DestroyJavaVM() function that frees allocated ressources in this case.
+

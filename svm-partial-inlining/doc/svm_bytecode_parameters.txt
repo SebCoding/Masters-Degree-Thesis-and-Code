@@ -1,0 +1,1122 @@
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * This source file is part of SableVM.                            *
+ *                                                                 *
+ * See the file "LICENSE" for the copyright information and for    *
+ * the terms and conditions for copying, distribution and          *
+ * modification of this source file.                               *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+
+*** SableVM Information about SVM_INSTRUCTIONS parameters ***
+
+This file details the type and purpose of every argument(s) for SableVM instructions
+that have parameters. (This is valid only for switch-threaded & direct-threaded modes)
+
+This file might not be up to date since developpers often add new bytecodes inside 
+SableVM
+
+==========================================================
+SWITCH_THREADED_INTERPRETER && DIRECT_THREADED_INTERPRETER
+==========================================================
+
+This section if valid for switch and direct threaded interpreter
+
+------------------------------------------------------------------------------------
+
+SVM_INSTRUCTION_REPLACE:
+
+param_1: (addr) @where_to_replace
+param_2: (_svmt_code) instruction_code
+
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_ILOAD:
+SVM_INSTRUCTION_FLOAD:
+SVM_INSTRUCTION_ISTORE:
+SVM_INSTRUCTION_FSTORE:
+SVM_INSTRUCTION_RET:
+SVM_INSTRUCTION_ASTORE_RET:
+
+param_1: (jint) non_ref_index
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_LLOAD:
+SVM_INSTRUCTION_DLOAD:
+SVM_INSTRUCTION_LSTORE:
+SVM_INSTRUCTION_DSTORE:
+
+param_1: (jint) long_index
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_ALOAD:
+SVM_INSTRUCTION_ASTORE:
+
+param_1: (jint) ref_index
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_IINC:
+
+param_1: (jint) non_ref_index
+param_2: (jint) constant
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_IFEQ:
+SVM_INSTRUCTION_IFNE:
+SVM_INSTRUCTION_IFLT:
+SVM_INSTRUCTION_IFGE:
+SVM_INSTRUCTION_IFGT:
+SVM_INSTRUCTION_IFLE:
+SVM_INSTRUCTION_IF_ICMPEQ:
+SVM_INSTRUCTION_IF_ICMPNE:
+SVM_INSTRUCTION_IF_ICMPLT:
+SVM_INSTRUCTION_IF_ICMPGE:
+SVM_INSTRUCTION_IF_ICMPGT:
+SVM_INSTRUCTION_IF_ICMPLE:
+SVM_INSTRUCTION_IF_ACMPEQ:
+SVM_INSTRUCTION_IF_ACMPNE:
+SVM_INSTRUCTION_GOTO:
+SVM_INSTRUCTION_JSR:
+SVM_INSTRUCTION_IFNULL:
+SVM_INSTRUCTION_IFNONNULL:
+
+param_1: (addr) @branch_target in code array
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_TABLESWITCH:
+
+param_1: (addr) @default_target
+param_2: (jint) low
+param_3: (jint) high
+
+param_4: (addr) @target 
+...
+param_(length+4): (addr) @target 
+
+note: length = high - low + 1
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_LOOKUPSWITCH:
+
+param_1: (addr) @default_target
+param_2: (jint) npairs`
+
+param_3: (jint) match_value
+param_4: (addr) @target
+...
+param_(npairs*2+4): (jint) match_value
+param_(npairs*2+4+1): (addr) @target
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_LDCINTEGER:
+
+param_1: (jint) value
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_LDC_FLOAT:
+
+param_1: (jfloat) value
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_LDC_LONG:
+
+param_1: (pjlong) @value
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_LDC_DOUBLE:
+
+param_1: (pjdouble) @value
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_MONITORENTER:
+SVM_INSTRUCTION_NEWARRAY_BOOLEAN:
+SVM_INSTRUCTION_NEWARRAY_CHAR:
+SVM_INSTRUCTION_NEWARRAY_FLOAT:
+SVM_INSTRUCTION_NEWARRAY_DOUBLE:
+SVM_INSTRUCTION_NEWARRAY_BYTE:
+SVM_INSTRUCTION_NEWARRAY_SHORT:
+SVM_INSTRUCTION_NEWARRAY_INT:
+SVM_INSTRUCTION_NEWARRAY_LONG:
+
+param_1: (*stack_gc_map) @stack_gc_map
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_IFEQ_CHECK:
+SVM_INSTRUCTION_IFNE_CHECK:
+SVM_INSTRUCTION_IFLT_CHECK:
+SVM_INSTRUCTION_IFGE_CHECK:
+SVM_INSTRUCTION_IFGT_CHECK:
+SVM_INSTRUCTION_IFLE_CHECK:
+SVM_INSTRUCTION_IF_ICMPEQ_CHECK:
+SVM_INSTRUCTION_IF_ICMPNE_CHECK:
+SVM_INSTRUCTION_IF_ICMPLT_CHECK:
+SVM_INSTRUCTION_IF_ICMPGE_CHECK:
+SVM_INSTRUCTION_IF_ICMPGT_CHECK:
+SVM_INSTRUCTION_IF_ICMPLE_CHECK:
+SVM_INSTRUCTION_IF_ACMPEQ_CHECK:
+SVM_INSTRUCTION_IF_ACMPNE_CHECK:
+SVM_INSTRUCTION_GOTO_CHECK:
+SVM_INSTRUCTION_JSR_CHECK:
+SVM_INSTRUCTION_IFNULL_CHECK:
+SVM_INSTRUCTION_IFNONNULL_CHECK:
+
+param_1: (stack_gc_map*) @stack_gc_map
+param_2: (addr) @target
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_TABLESWITCH_CHECK:
+
+param_1: (stack_gc_map*) @stack_gc_map
+param_2: (addr) @default_target
+param_3: (jint) low
+param_4: (jint) high
+
+param_5: (addr) @target 
+...
+param_(length+5): (addr) @target 
+
+note: length = high - low + 1
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_LOOKUPSWITCH_CHECK:
+
+param_1: (stack_gc_map*) @stack_gc_map
+param_2: (addr) @default_target
+param_3: (jint) npairs
+
+param_4: (jint) match_value
+param_5: (addr) @target
+...
+param_(npairs*2+5): (jint) match_value
+param_(npairs*2+5+1): (addr) @target
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_LDC_STRING:
+
+param_1: (addr) @preparation_addr (to be skipped)
+param_2: (jobject) string_ref
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_PREPARE_LDC_STRING:
+
+param_1: (addr) @string_ref (where to store the string_ref in code array)
+param_2: (_svmt_CONSTANT_String_info*) @stringref_info
+param_3: (stack_gc_map*) @stack_gc_map
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_GETSTATIC_BOOLEAN:
+SVM_INSTRUCTION_GETSTATIC_BYTE:
+SVM_INSTRUCTION_GETSTATIC_SHORT:
+SVM_INSTRUCTION_GETSTATIC_CHAR:
+SVM_INSTRUCTION_GETSTATIC_INT:
+SVM_INSTRUCTION_GETSTATIC_LONG:
+SVM_INSTRUCTION_GETSTATIC_FLOAT:
+SVM_INSTRUCTION_GETSTATIC_DOUBLE:
+SVM_INSTRUCTION_GETSTATIC_REFERENCE:
+SVM_INSTRUCTION_PUTSTATIC_BOOLEAN:
+SVM_INSTRUCTION_PUTSTATIC_BYTE:
+SVM_INSTRUCTION_PUTSTATIC_SHORT:
+SVM_INSTRUCTION_PUTSTATIC_CHAR:
+SVM_INSTRUCTION_PUTSTATIC_INT:
+SVM_INSTRUCTION_PUTSTATIC_LONG:
+SVM_INSTRUCTION_PUTSTATIC_FLOAT:
+SVM_INSTRUCTION_PUTSTATIC_DOUBLE:
+SVM_INSTRUCTION_PUTSTATIC_REFERENCE:
+SVM_INSTRUCTION_GETFIELD_BOOLEAN:
+SVM_INSTRUCTION_GETFIELD_BYTE:
+SVM_INSTRUCTION_GETFIELD_SHORT:
+SVM_INSTRUCTION_GETFIELD_CHAR:
+SVM_INSTRUCTION_GETFIELD_INT:
+SVM_INSTRUCTION_GETFIELD_LONG:
+SVM_INSTRUCTION_GETFIELD_FLOAT:
+SVM_INSTRUCTION_GETFIELD_DOUBLE:
+SVM_INSTRUCTION_GETFIELD_REFERENCE:
+SVM_INSTRUCTION_PUTFIELD_BOOLEAN:
+SVM_INSTRUCTION_PUTFIELD_BYTE:
+SVM_INSTRUCTION_PUTFIELD_SHORT:
+SVM_INSTRUCTION_PUTFIELD_CHAR:
+SVM_INSTRUCTION_PUTFIELD_INT:
+SVM_INSTRUCTION_PUTFIELD_LONG:
+SVM_INSTRUCTION_PUTFIELD_FLOAT:
+SVM_INSTRUCTION_PUTFIELD_DOUBLE:
+SVM_INSTRUCTION_PUTFIELD_REFERENCE:
+
+param_1: (addr) @preparation_seq (to be skipped)
+param_2: (jvalue*)  @value;
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_PREPARE_GETSTATIC_BOOLEAN:
+SVM_INSTRUCTION_PREPARE_GETSTATIC_BYTE:
+SVM_INSTRUCTION_PREPARE_GETSTATIC_SHORT:
+SVM_INSTRUCTION_PREPARE_GETSTATIC_CHAR:
+SVM_INSTRUCTION_PREPARE_GETSTATIC_INT:
+SVM_INSTRUCTION_PREPARE_GETSTATIC_LONG:
+SVM_INSTRUCTION_PREPARE_GETSTATIC_FLOAT:
+SVM_INSTRUCTION_PREPARE_GETSTATIC_DOUBLE:
+SVM_INSTRUCTION_PREPARE_GETSTATIC_REFERENCE:
+SVM_INSTRUCTION_PREPARE_PUTSTATIC_BOOLEAN:
+SVM_INSTRUCTION_PREPARE_PUTSTATIC_BYTE:
+SVM_INSTRUCTION_PREPARE_PUTSTATIC_SHORT:
+SVM_INSTRUCTION_PREPARE_PUTSTATIC_CHAR:
+SVM_INSTRUCTION_PREPARE_PUTSTATIC_INT:
+SVM_INSTRUCTION_PREPARE_PUTSTATIC_LONG:
+SVM_INSTRUCTION_PREPARE_PUTSTATIC_FLOAT:
+SVM_INSTRUCTION_PREPARE_PUTSTATIC_DOUBLE:
+SVM_INSTRUCTION_PREPARE_PUTSTATIC_REFERENCE:
+SVM_INSTRUCTION_PREPARE_GETFIELD_BOOLEAN:
+SVM_INSTRUCTION_PREPARE_GETFIELD_BYTE:
+SVM_INSTRUCTION_PREPARE_GETFIELD_SHORT:
+SVM_INSTRUCTION_PREPARE_GETFIELD_CHAR:
+SVM_INSTRUCTION_PREPARE_GETFIELD_INT:
+SVM_INSTRUCTION_PREPARE_GETFIELD_LONG:
+SVM_INSTRUCTION_PREPARE_GETFIELD_FLOAT:
+SVM_INSTRUCTION_PREPARE_GETFIELD_DOUBLE:
+SVM_INSTRUCTION_PREPARE_GETFIELD_REFERENCE:
+SVM_INSTRUCTION_PREPARE_PUTFIELD_BOOLEAN:
+SVM_INSTRUCTION_PREPARE_PUTFIELD_BYTE:
+SVM_INSTRUCTION_PREPARE_PUTFIELD_SHORT:
+SVM_INSTRUCTION_PREPARE_PUTFIELD_CHAR:
+SVM_INSTRUCTION_PREPARE_PUTFIELD_INT:
+SVM_INSTRUCTION_PREPARE_PUTFIELD_LONG:
+SVM_INSTRUCTION_PREPARE_PUTFIELD_FLOAT:
+SVM_INSTRUCTION_PREPARE_PUTFIELD_DOUBLE:
+SVM_INSTRUCTION_PREPARE_PUTFIELD_REFERENCE:
+
+param_1: (addr) @pointer_to_value (addr of the pointer to the value)
+param_2: (_svmt_CONSTANT_Fieldref_info*) @fieldref_info
+param_3: (stack_gc_map*) @stack_gc_map
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_INVOKESPECIAL:
+SVM_INSTRUCTION_INVOKESTATIC:
+
+param_1: (addr) @preparation_seq (to be skipped)
+param_2: (jint) args_count
+param_3: (_svmt_method_info*) @method_info	
+param_4: (stack_gc_map*) @stack_gc_map
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_INVOKEINTERFACE:
+SVM_INSTRUCTION_INVOKEVIRTUAL:
+
+param_1: (addr) @preparation_seq (to be skipped)
+param_2: (jint) args_count	 
+param_3: (size_t) method_offset 
+param_4: (stack_gc_map*) @stack_gc_map
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_INLINED_INVOKESTATIC:
+SVM_INSTRUCTION_INLINED_INVOKESPECIAL:
+
+param_1: (jint) inlined_code_length
+param_2: (jint) args_count
+param_3: (addr) @method_info
+param_4: (stack_gc_map*) @stack_gc_map
+
+---------------------------------------------------------------------------
+SVM_INSTRUCTION_INLINED_INVOKEVIRTUAL:
+SVM_INSTRUCTION_INLINED_INVOKEINTERFACE:	
+
+param_1: (jint) inlined_code_length
+param_2: (addr) @method_info
+param_3: (jint) args_count
+param_4: (size_t) method_offset 
+param_5: (stack_gc_map*) @stack_gc_map
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_PREPARE_INVOKEVIRTUAL:
+SVM_INSTRUCTION_PREPARE_INVOKESPECIAL:
+SVM_INSTRUCTION_PREPARE_INVOKESTATIC:
+
+param_1: (addr) @args_count
+param_2: (_svmt_CONSTANT_Methodref_info*) @methodref_info
+param_3: (stack_gc_map*) @stack_gc_map
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_PREPARE_INVOKEINTERFACE:
+
+param_1: (addr) @args_count
+param_2: (_svmt_CONSTANT_InterfaceMethodref_info*) @imethodref_info
+param_3: (stack_gc_map*) @stack_gc_map
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_NEW:
+SVM_INSTRUCTION_ANEWARRAY:
+
+param_1: (addr) @preparation_seq (to be skipped)
+param_2: (_svmt_class_info*) @class_info
+param_3: (stack_gc_map*) @stack_gc_map
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_PREPARE_NEW:
+SVM_INSTRUCTION_PREPARE_ANEWARRAY:
+
+param_1: (addr) @class_info_pointer (where to store class_info pointer)
+param_2: (_svmt_CONSTANT_Class_info*) @classref_info
+param_3: (stack_gc_map*) @stack_gc_map
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_CHECKCAST:
+SVM_INSTRUCTION_INSTANCEOF:
+
+param_1: (addr) @preparation_seq (to be skipped)
+param_2: (_svmt_type_info*) @type_info
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_PREPARE_CHECKCAST:
+SVM_INSTRUCTION_PREPARE_INSTANCEOF:
+
+param_1: (addr) @type_info_pointer (where to store the type_info pointer)
+param_2: (_svmt_CONSTANT_Class_info*) @classref_info
+param_3: (stack_gc_map*) @stack_gc_map
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_MULTIANEWARRAY:
+
+param_1: (addr) @preparation_seq (to be skipped)
+param_2: (_svmt_array_info*) @array_info
+param_3: (jint) num_of_dimensions
+param_4: (stack_gc_map*) @stack_gc_map
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_PREPARE_MULTIANEWARRAY:
+
+param_1: (addr) @array_info_pointer (where to store the array_info pointer)
+param_2: (_svmt_CONSTANT_Class_info*) @classref_info
+param_3: (jint) num_of_dimensions
+param_4: (stack_gc_map*) @stack_gc_map
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_INLINED_IRETURN:
+SVM_INSTRUCTION_INLINED_LRETURN:
+SVM_INSTRUCTION_INLINED_FRETURN:
+SVM_INSTRUCTION_INLINED_DRETURN:
+SVM_INSTRUCTION_INLINED_ARETURN:
+SVM_INSTRUCTION_INLINED_RETURN:
+
+param_1: (addr) @stack_gc_map (at the end of inlined code)
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_SPECIAL_TABLESWITCH:
+
+param_1: (addr) @orginal tableswitch (in original code)
+param_2: (jint) low
+param_3: (jint) high
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_SPECIAL_LOOKUPSWITCH:
+
+param_1: (addr) @orginal lookupswitch (in original code)
+param_2: (jint) match #1 (for the fisrt case)
+
+---------------------------------------------------------------------------
+SVM_INSTRUCTION_SPECIAL_TABLESWITCH_CHECK:
+
+param_1: (addr) @orginal tableswitch (in original code)
+param_2: (jint) low
+param_3: (jint) high
+param_4: (stack_gc_map*) @stack_gc_map
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_SPECIAL_LOOKUPSWITCH_CHECK:
+
+param_1: (addr) @orginal lookupswitch (in original code)
+param_2: (jint) match #1 (for the fisrt case)
+param_3: (stack_gc_map*) @stack_gc_map
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_PROFILING_FWD_IFEQ:
+SVM_INSTRUCTION_PROFILING_FWD_IFNE:
+SVM_INSTRUCTION_PROFILING_FWD_IFLT:
+SVM_INSTRUCTION_PROFILING_FWD_IFGE:
+SVM_INSTRUCTION_PROFILING_FWD_IFGT:
+SVM_INSTRUCTION_PROFILING_FWD_IFLE:
+SVM_INSTRUCTION_PROFILING_FWD_IF_ICMPEQ:
+SVM_INSTRUCTION_PROFILING_FWD_IF_ICMPNE:
+SVM_INSTRUCTION_PROFILING_FWD_IF_ICMPLT:
+SVM_INSTRUCTION_PROFILING_FWD_IF_ICMPGE:
+SVM_INSTRUCTION_PROFILING_FWD_IF_ICMPGT:
+SVM_INSTRUCTION_PROFILING_FWD_IF_ICMPLE:
+SVM_INSTRUCTION_PROFILING_FWD_IF_ACMPEQ:
+SVM_INSTRUCTION_PROFILING_FWD_IF_ACMPNE:
+SVM_INSTRUCTION_PROFILING_FWD_IFNULL:
+SVM_INSTRUCTION_PROFILING_FWD_IFNONNULL:
+
+param_1: (jint) number of times no jump
+param_2: (jint) number of times jump
+param_3: (addr) @branch_target in code array
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_PROFILING_FWD_IFEQ_CHECK:
+SVM_INSTRUCTION_PROFILING_FWD_IFNE_CHECK:
+SVM_INSTRUCTION_PROFILING_FWD_IFLT_CHECK:
+SVM_INSTRUCTION_PROFILING_FWD_IFGE_CHECK:
+SVM_INSTRUCTION_PROFILING_FWD_IFGT_CHECK:
+SVM_INSTRUCTION_PROFILING_FWD_IFLE_CHECK:
+SVM_INSTRUCTION_PROFILING_FWD_IF_ICMPEQ_CHECK:
+SVM_INSTRUCTION_PROFILING_FWD_IF_ICMPNE_CHECK:
+SVM_INSTRUCTION_PROFILING_FWD_IF_ICMPLT_CHECK:
+SVM_INSTRUCTION_PROFILING_FWD_IF_ICMPGE_CHECK:
+SVM_INSTRUCTION_PROFILING_FWD_IF_ICMPGT_CHECK:
+SVM_INSTRUCTION_PROFILING_FWD_IF_ICMPLE_CHECK:
+SVM_INSTRUCTION_PROFILING_FWD_IF_ACMPEQ_CHECK:
+SVM_INSTRUCTION_PROFILING_FWD_IF_ACMPNE_CHECK:
+SVM_INSTRUCTION_PROFILING_FWD_IFNULL_CHECK:
+SVM_INSTRUCTION_PROFILING_FWD_IFNONNULL_CHECK:
+
+param_1: (addr) @stack_gc_map
+param_2: (jint) number of times no jump
+param_3: (jint) number of times jump
+param_4: (addr) @branch_target in code array
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_PROFILING_BCK_IFEQ:
+SVM_INSTRUCTION_PROFILING_BCK_IFNE:
+SVM_INSTRUCTION_PROFILING_BCK_IFLT:
+SVM_INSTRUCTION_PROFILING_BCK_IFGE:
+SVM_INSTRUCTION_PROFILING_BCK_IFGT:
+SVM_INSTRUCTION_PROFILING_BCK_IFLE:
+SVM_INSTRUCTION_PROFILING_BCK_IF_ICMPEQ:
+SVM_INSTRUCTION_PROFILING_BCK_IF_ICMPNE:
+SVM_INSTRUCTION_PROFILING_BCK_IF_ICMPLT:
+SVM_INSTRUCTION_PROFILING_BCK_IF_ICMPGE:
+SVM_INSTRUCTION_PROFILING_BCK_IF_ICMPGT:
+SVM_INSTRUCTION_PROFILING_BCK_IF_ICMPLE:
+SVM_INSTRUCTION_PROFILING_BCK_IF_ACMPEQ:
+SVM_INSTRUCTION_PROFILING_BCK_IF_ACMPNE:
+SVM_INSTRUCTION_PROFILING_BCK_IFNULL:
+SVM_INSTRUCTION_PROFILING_BCK_IFNONNULL:
+
+SVM_INSTRUCTION_PROFILING_BCK_IFEQ_CHECK:
+SVM_INSTRUCTION_PROFILING_BCK_IFNE_CHECK:
+SVM_INSTRUCTION_PROFILING_BCK_IFLT_CHECK:
+SVM_INSTRUCTION_PROFILING_BCK_IFGE_CHECK:
+SVM_INSTRUCTION_PROFILING_BCK_IFGT_CHECK:
+SVM_INSTRUCTION_PROFILING_BCK_IFLE_CHECK:
+SVM_INSTRUCTION_PROFILING_BCK_IF_ICMPEQ_CHECK:
+SVM_INSTRUCTION_PROFILING_BCK_IF_ICMPNE_CHECK:
+SVM_INSTRUCTION_PROFILING_BCK_IF_ICMPLT_CHECK:
+SVM_INSTRUCTION_PROFILING_BCK_IF_ICMPGE_CHECK:
+SVM_INSTRUCTION_PROFILING_BCK_IF_ICMPGT_CHECK:
+SVM_INSTRUCTION_PROFILING_BCK_IF_ICMPLE_CHECK:
+SVM_INSTRUCTION_PROFILING_BCK_IF_ACMPEQ_CHECK:
+SVM_INSTRUCTION_PROFILING_BCK_IF_ACMPNE_CHECK:
+SVM_INSTRUCTION_PROFILING_BCK_IFNULL_CHECK:
+SVM_INSTRUCTION_PROFILING_BCK_IFNONNULL_CHECK:
+
+param_x: ???????????
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_PROFILING_INVOKESPECIAL:
+SVM_INSTRUCTION_PROFILING_INVOKESTATIC:
+
+param_1: (jint) number of invokations
+param_2: (jint) args_count
+param_3: (_svmt_method_info*) @method_info	
+param_4: (stack_gc_map*) @stack_gc_map
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_PROFILING_INVOKEINTERFACE:
+SVM_INSTRUCTION_PROFILING_INVOKEVIRTUAL:
+
+param_1: (_svmt_method_invoke_info*) @method_invoke_info
+param_2: (jint) args_count	 
+param_3: (size_t) method_offset 
+param_4: (stack_gc_map*) @stack_gc_map
+
+
+==========================================================
+INLINED_THREADED_INTERPRETER
+==========================================================
+
+This section if valid for inlined threaded interpreter
+
+------------------------------------------------------------------------------------
+
+SVM_INSTRUCTION_REPLACE:
+
+param_1: (addr) @where_to_replace
+param_2: (_svmt_code) instruction_code 
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_ILOAD:
+SVM_INSTRUCTION_FLOAD:
+SVM_INSTRUCTION_ISTORE:
+SVM_INSTRUCTION_FSTORE:
+SVM_INSTRUCTION_RET:
+SVM_INSTRUCTION_ASTORE_RET:
+
+param_1: (jint) non_ref_index
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_LLOAD:
+SVM_INSTRUCTION_DLOAD:
+SVM_INSTRUCTION_LSTORE:
+SVM_INSTRUCTION_DSTORE:
+
+param_1: (jint) long_index
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_ALOAD:
+SVM_INSTRUCTION_ASTORE:
+
+param_1: (jint) ref_index
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_IINC:
+
+param_1: (jint) non_ref_index
+param_2: (jint) constant
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_IFEQ:
+SVM_INSTRUCTION_IFNE:
+SVM_INSTRUCTION_IFLT:
+SVM_INSTRUCTION_IFGE:
+SVM_INSTRUCTION_IFGT:
+SVM_INSTRUCTION_IFLE:
+SVM_INSTRUCTION_IF_ICMPEQ:
+SVM_INSTRUCTION_IF_ICMPNE:
+SVM_INSTRUCTION_IF_ICMPLT:
+SVM_INSTRUCTION_IF_ICMPGE:
+SVM_INSTRUCTION_IF_ICMPGT:
+SVM_INSTRUCTION_IF_ICMPLE:
+SVM_INSTRUCTION_IF_ACMPEQ:
+SVM_INSTRUCTION_IF_ACMPNE:
+SVM_INSTRUCTION_GOTO:
+SVM_INSTRUCTION_JSR:
+SVM_INSTRUCTION_IFNULL:
+SVM_INSTRUCTION_IFNONNULL:
+
+param_1: (addr) @branch_target in code array
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_TABLESWITCH:
+
+param_1: (addr) @default_target
+param_2: (jint) low
+param_3: (jint) high
+
+param_4: (addr) @target 
+...
+param_(length+4): (addr) @target 
+
+note: length = high - low + 1
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_LOOKUPSWITCH:
+
+param_1: (addr) @default_target
+param_2: (jint) npairs
+
+param_3: (jint) match_value
+param_4: (addr) @target
+...
+param_(npairs*2+4): (jint) match_value
+param_(npairs*2+4+1): (addr) @target
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_LDCINTEGER:
+
+param_1: (jint) value
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_LDC_FLOAT:
+
+param_1: (jfloat) value
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_LDC_LONG:
+
+param_1: (pjlong) @value
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_LDC_DOUBLE:
+
+param_1: (pjdouble) @value
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_MONITORENTER:
+SVM_INSTRUCTION_NEWARRAY_BOOLEAN:
+SVM_INSTRUCTION_NEWARRAY_CHAR:
+SVM_INSTRUCTION_NEWARRAY_FLOAT:
+SVM_INSTRUCTION_NEWARRAY_DOUBLE:
+SVM_INSTRUCTION_NEWARRAY_BYTE:
+SVM_INSTRUCTION_NEWARRAY_SHORT:
+SVM_INSTRUCTION_NEWARRAY_INT:
+SVM_INSTRUCTION_NEWARRAY_LONG:
+
+param_1: (*stack_gc_map) @stack_gc_map
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_IFEQ_CHECK:
+SVM_INSTRUCTION_IFNE_CHECK:
+SVM_INSTRUCTION_IFLT_CHECK:
+SVM_INSTRUCTION_IFGE_CHECK:
+SVM_INSTRUCTION_IFGT_CHECK:
+SVM_INSTRUCTION_IFLE_CHECK:
+SVM_INSTRUCTION_IF_ICMPEQ_CHECK:
+SVM_INSTRUCTION_IF_ICMPNE_CHECK:
+SVM_INSTRUCTION_IF_ICMPLT_CHECK:
+SVM_INSTRUCTION_IF_ICMPGE_CHECK:
+SVM_INSTRUCTION_IF_ICMPGT_CHECK:
+SVM_INSTRUCTION_IF_ICMPLE_CHECK:
+SVM_INSTRUCTION_IF_ACMPEQ_CHECK:
+SVM_INSTRUCTION_IF_ACMPNE_CHECK:
+SVM_INSTRUCTION_GOTO_CHECK:
+SVM_INSTRUCTION_JSR_CHECK:
+SVM_INSTRUCTION_IFNULL_CHECK:
+SVM_INSTRUCTION_IFNONNULL_CHECK:
+
+param_1: (stack_gc_map*) @stack_gc_map
+param_2: (addr) @target
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_TABLESWITCH_CHECK:
+
+param_1: (stack_gc_map*) @stack_gc_map
+param_2: (addr) @default_target
+param_3: (jint) low
+param_4: (jint) high
+
+param_5: (addr) @target 
+...
+param_(length+5): (addr) @target 
+
+note: length = high - low + 1
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_LOOKUPSWITCH_CHECK:
+
+param_1: (stack_gc_map*) @stack_gc_map
+param_2: (addr) @default_target
+param_3: (jint) npairs
+
+param_4: (jint) match_value
+param_5: (addr) @target
+...
+param_(npairs*2+5): (jint) match_value
+param_(npairs*2+5+1): (addr) @target
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_LDC_STRING:
+
+if (SVM_INLINEABLE_LDC_STRING != SVM_INTRP_FLAG_INLINEABLE)
+{
+   param_1: (addr) @preparation_addr (to be skipped)
+   param_2: (jobject) string_ref
+}
+else
+{
+   param_1: (jobject) string_ref
+}
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_PREPARE_LDC_STRING:
+
+param_1: (addr) @string_ref (where to store the string_ref in code array)
+param_2: (_svmt_CONSTANT_String_info*) @stringref_info
+param_3: (stack_gc_map*) @stack_gc_map
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_GETSTATIC_BOOLEAN:
+SVM_INSTRUCTION_GETSTATIC_BYTE:
+SVM_INSTRUCTION_GETSTATIC_SHORT:
+SVM_INSTRUCTION_GETSTATIC_CHAR:
+SVM_INSTRUCTION_GETSTATIC_INT:
+SVM_INSTRUCTION_GETSTATIC_LONG:
+SVM_INSTRUCTION_GETSTATIC_FLOAT:
+SVM_INSTRUCTION_GETSTATIC_DOUBLE:
+SVM_INSTRUCTION_GETSTATIC_REFERENCE:
+SVM_INSTRUCTION_PUTSTATIC_BOOLEAN:
+SVM_INSTRUCTION_PUTSTATIC_BYTE:
+SVM_INSTRUCTION_PUTSTATIC_SHORT:
+SVM_INSTRUCTION_PUTSTATIC_CHAR:
+SVM_INSTRUCTION_PUTSTATIC_INT:
+SVM_INSTRUCTION_PUTSTATIC_LONG:
+SVM_INSTRUCTION_PUTSTATIC_FLOAT:
+SVM_INSTRUCTION_PUTSTATIC_DOUBLE:
+SVM_INSTRUCTION_PUTSTATIC_REFERENCE:
+SVM_INSTRUCTION_GETFIELD_BOOLEAN:
+SVM_INSTRUCTION_GETFIELD_BYTE:
+SVM_INSTRUCTION_GETFIELD_SHORT:
+SVM_INSTRUCTION_GETFIELD_CHAR:
+SVM_INSTRUCTION_GETFIELD_INT:
+SVM_INSTRUCTION_GETFIELD_LONG:
+SVM_INSTRUCTION_GETFIELD_FLOAT:
+SVM_INSTRUCTION_GETFIELD_DOUBLE:
+SVM_INSTRUCTION_GETFIELD_REFERENCE:
+SVM_INSTRUCTION_PUTFIELD_BOOLEAN:
+SVM_INSTRUCTION_PUTFIELD_BYTE:
+SVM_INSTRUCTION_PUTFIELD_SHORT:
+SVM_INSTRUCTION_PUTFIELD_CHAR:
+SVM_INSTRUCTION_PUTFIELD_INT:
+SVM_INSTRUCTION_PUTFIELD_LONG:
+SVM_INSTRUCTION_PUTFIELD_FLOAT:
+SVM_INSTRUCTION_PUTFIELD_DOUBLE:
+SVM_INSTRUCTION_PUTFIELD_REFERENCE:
+
+if (SVM_INLINEABLE_GET<X> != SVM_INTRP_FLAG_INLINEABLE) or
+if (SVM_INLINEABLE_PUT<X> != SVM_INTRP_FLAG_INLINEABLE)
+{
+   param_1: (addr) @preparation_seq (to be skipped)
+   param_2: (jvalue*)  @value;
+}
+else
+{	
+   param_1: (jvalue*)  @value;
+}	
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_PREPARE_GETSTATIC_BOOLEAN:
+SVM_INSTRUCTION_PREPARE_GETSTATIC_BYTE:
+SVM_INSTRUCTION_PREPARE_GETSTATIC_SHORT:
+SVM_INSTRUCTION_PREPARE_GETSTATIC_CHAR:
+SVM_INSTRUCTION_PREPARE_GETSTATIC_INT:
+SVM_INSTRUCTION_PREPARE_GETSTATIC_LONG:
+SVM_INSTRUCTION_PREPARE_GETSTATIC_FLOAT:
+SVM_INSTRUCTION_PREPARE_GETSTATIC_DOUBLE:
+SVM_INSTRUCTION_PREPARE_GETSTATIC_REFERENCE:
+SVM_INSTRUCTION_PREPARE_PUTSTATIC_BOOLEAN:
+SVM_INSTRUCTION_PREPARE_PUTSTATIC_BYTE:
+SVM_INSTRUCTION_PREPARE_PUTSTATIC_SHORT:
+SVM_INSTRUCTION_PREPARE_PUTSTATIC_CHAR:
+SVM_INSTRUCTION_PREPARE_PUTSTATIC_INT:
+SVM_INSTRUCTION_PREPARE_PUTSTATIC_LONG:
+SVM_INSTRUCTION_PREPARE_PUTSTATIC_FLOAT:
+SVM_INSTRUCTION_PREPARE_PUTSTATIC_DOUBLE:
+SVM_INSTRUCTION_PREPARE_PUTSTATIC_REFERENCE:
+SVM_INSTRUCTION_PREPARE_GETFIELD_BOOLEAN:
+SVM_INSTRUCTION_PREPARE_GETFIELD_BYTE:
+SVM_INSTRUCTION_PREPARE_GETFIELD_SHORT:
+SVM_INSTRUCTION_PREPARE_GETFIELD_CHAR:
+SVM_INSTRUCTION_PREPARE_GETFIELD_INT:
+SVM_INSTRUCTION_PREPARE_GETFIELD_LONG:
+SVM_INSTRUCTION_PREPARE_GETFIELD_FLOAT:
+SVM_INSTRUCTION_PREPARE_GETFIELD_DOUBLE:
+SVM_INSTRUCTION_PREPARE_GETFIELD_REFERENCE:
+SVM_INSTRUCTION_PREPARE_PUTFIELD_BOOLEAN:
+SVM_INSTRUCTION_PREPARE_PUTFIELD_BYTE:
+SVM_INSTRUCTION_PREPARE_PUTFIELD_SHORT:
+SVM_INSTRUCTION_PREPARE_PUTFIELD_CHAR:
+SVM_INSTRUCTION_PREPARE_PUTFIELD_INT:
+SVM_INSTRUCTION_PREPARE_PUTFIELD_LONG:
+SVM_INSTRUCTION_PREPARE_PUTFIELD_FLOAT:
+SVM_INSTRUCTION_PREPARE_PUTFIELD_DOUBLE:
+SVM_INSTRUCTION_PREPARE_PUTFIELD_REFERENCE:
+
+param_1: (addr) @pointer_to_value (addr of the pointer to the value)
+param_2: (_svmt_CONSTANT_Fieldref_info*) @fieldref_info
+param_3: (stack_gc_map*) @stack_gc_map
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_INVOKESPECIAL:
+SVM_INSTRUCTION_INVOKESTATIC:
+
+param_1: (addr) @preparation_seq (to be skipped)
+param_2: (jint) args_count
+param_3: (_svmt_method_info*) @method_info	
+param_4: (stack_gc_map*) @stack_gc_map
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_INVOKEINTERFACE:
+SVM_INSTRUCTION_INVOKEVIRTUAL:
+
+param_1: (addr) @preparation_seq (to be skipped)
+param_2: (jint) args_count	 
+param_3: (size_t) method_offset 
+param_4: (stack_gc_map*) @stack_gc_map
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_INLINED_INVOKESTATIC:
+SVM_INSTRUCTION_INLINED_INVOKESPECIAL:
+
+param_1: (jint) inlined_code_length
+param_2: (jint) args_count
+param_3: (addr) @method_info
+param_4: (stack_gc_map*) @stack_gc_map
+
+---------------------------------------------------------------------------
+SVM_INSTRUCTION_INLINED_INVOKEVIRTUAL:
+SVM_INSTRUCTION_INLINED_INVOKEINTERFACE:	
+
+param_1: (jint) inlined_code_length
+param_2: (addr) @method_info
+param_3: (jint) args_count
+param_4: (size_t) method_offset 
+param_5: (stack_gc_map*) @stack_gc_map
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_PREPARE_INVOKEVIRTUAL:
+SVM_INSTRUCTION_PREPARE_INVOKESPECIAL:
+SVM_INSTRUCTION_PREPARE_INVOKESTATIC:
+
+param_1: (addr) @args_count
+param_2: (_svmt_CONSTANT_Methodref_info*) @methodref_info
+param_3: (stack_gc_map*) @stack_gc_map
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_PREPARE_INVOKEINTERFACE:
+
+param_1: (addr) @args_count
+param_2: (_svmt_CONSTANT_InterfaceMethodref_info*) @imethodref_info
+param_3: (stack_gc_map*) @stack_gc_map
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_NEW:
+SVM_INSTRUCTION_ANEWARRAY:
+
+param_1: (addr) @preparation_seq (to be skipped)
+param_2: (_svmt_class_info*) @class_info
+param_3: (stack_gc_map*) @stack_gc_map
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_PREPARE_NEW:
+SVM_INSTRUCTION_PREPARE_ANEWARRAY:
+
+param_1: (addr) @class_info_pointer (where to store class_info pointer)
+param_2: (_svmt_CONSTANT_Class_info*) @classref_info
+param_3: (stack_gc_map*) @stack_gc_map
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_CHECKCAST:
+SVM_INSTRUCTION_INSTANCEOF:
+
+param_1: (addr) @preparation_seq (to be skipped)
+param_2: (_svmt_type_info*) @type_info
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_PREPARE_CHECKCAST:
+SVM_INSTRUCTION_PREPARE_INSTANCEOF:
+
+param_1: (addr) @type_info_pointer (where to store the type_info pointer)
+param_2: (_svmt_CONSTANT_Class_info*) @classref_info
+param_3: (stack_gc_map*) @stack_gc_map
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_MULTIANEWARRAY:
+
+param_1: (addr) @preparation_seq (to be skipped)
+param_2: (_svmt_array_info*) @array_info
+param_3: (jint) num_of_dimensions
+param_4: (stack_gc_map*) @stack_gc_map
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_PREPARE_MULTIANEWARRAY:
+
+param_1: (addr) @array_info_pointer (where to store the array_info pointer)
+param_2: (_svmt_CONSTANT_Class_info*) @classref_info
+param_3: (jint) num_of_dimensions
+param_4: (stack_gc_map*) @stack_gc_map
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_INLINED_IRETURN:
+SVM_INSTRUCTION_INLINED_LRETURN:
+SVM_INSTRUCTION_INLINED_FRETURN:
+SVM_INSTRUCTION_INLINED_DRETURN:
+SVM_INSTRUCTION_INLINED_ARETURN:
+SVM_INSTRUCTION_INLINED_RETURN:
+
+param_1: (addr) @stack_gc_map (at the end of inlined code)
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_SPECIAL_TABLESWITCH:
+
+param_1: (addr) @orginal tableswitch (in original code)
+param_2: (jint) low
+param_3: (jint) high
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_SPECIAL_LOOKUPSWITCH:
+
+param_1: (addr) @orginal lookupswitch (in original code)
+param_2: (jint) match #1 (for the fisrt case)
+
+---------------------------------------------------------------------------
+SVM_INSTRUCTION_SPECIAL_TABLESWITCH_CHECK:
+
+param_1: (addr) @orginal tableswitch (in original code)
+param_2: (jint) low
+param_3: (jint) high
+param_4: (stack_gc_map*) @stack_gc_map
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_SPECIAL_LOOKUPSWITCH_CHECK:
+
+param_1: (addr) @orginal lookupswitch (in original code)
+param_2: (jint) match #1 (for the fisrt case)
+param_3: (stack_gc_map*) @stack_gc_map
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_PROFILING_FWD_IFEQ:
+SVM_INSTRUCTION_PROFILING_FWD_IFNE:
+SVM_INSTRUCTION_PROFILING_FWD_IFLT:
+SVM_INSTRUCTION_PROFILING_FWD_IFGE:
+SVM_INSTRUCTION_PROFILING_FWD_IFGT:
+SVM_INSTRUCTION_PROFILING_FWD_IFLE:
+SVM_INSTRUCTION_PROFILING_FWD_IF_ICMPEQ:
+SVM_INSTRUCTION_PROFILING_FWD_IF_ICMPNE:
+SVM_INSTRUCTION_PROFILING_FWD_IF_ICMPLT:
+SVM_INSTRUCTION_PROFILING_FWD_IF_ICMPGE:
+SVM_INSTRUCTION_PROFILING_FWD_IF_ICMPGT:
+SVM_INSTRUCTION_PROFILING_FWD_IF_ICMPLE:
+SVM_INSTRUCTION_PROFILING_FWD_IF_ACMPEQ:
+SVM_INSTRUCTION_PROFILING_FWD_IF_ACMPNE:
+SVM_INSTRUCTION_PROFILING_FWD_IFNULL:
+SVM_INSTRUCTION_PROFILING_FWD_IFNONNULL:
+
+param_1: (jint) number of times no jump
+param_2: (jint) number of times jump
+param_3: (addr) @branch_target in code array
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_PROFILING_FWD_IFEQ_CHECK:
+SVM_INSTRUCTION_PROFILING_FWD_IFNE_CHECK:
+SVM_INSTRUCTION_PROFILING_FWD_IFLT_CHECK:
+SVM_INSTRUCTION_PROFILING_FWD_IFGE_CHECK:
+SVM_INSTRUCTION_PROFILING_FWD_IFGT_CHECK:
+SVM_INSTRUCTION_PROFILING_FWD_IFLE_CHECK:
+SVM_INSTRUCTION_PROFILING_FWD_IF_ICMPEQ_CHECK:
+SVM_INSTRUCTION_PROFILING_FWD_IF_ICMPNE_CHECK:
+SVM_INSTRUCTION_PROFILING_FWD_IF_ICMPLT_CHECK:
+SVM_INSTRUCTION_PROFILING_FWD_IF_ICMPGE_CHECK:
+SVM_INSTRUCTION_PROFILING_FWD_IF_ICMPGT_CHECK:
+SVM_INSTRUCTION_PROFILING_FWD_IF_ICMPLE_CHECK:
+SVM_INSTRUCTION_PROFILING_FWD_IF_ACMPEQ_CHECK:
+SVM_INSTRUCTION_PROFILING_FWD_IF_ACMPNE_CHECK:
+SVM_INSTRUCTION_PROFILING_FWD_IFNULL_CHECK:
+SVM_INSTRUCTION_PROFILING_FWD_IFNONNULL_CHECK:
+
+param_1: (addr) @stack_gc_map
+param_2: (jint) number of times no jump
+param_3: (jint) number of times jump
+param_4: (addr) @branch_target in code array
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_PROFILING_BCK_IFEQ:
+SVM_INSTRUCTION_PROFILING_BCK_IFNE:
+SVM_INSTRUCTION_PROFILING_BCK_IFLT:
+SVM_INSTRUCTION_PROFILING_BCK_IFGE:
+SVM_INSTRUCTION_PROFILING_BCK_IFGT:
+SVM_INSTRUCTION_PROFILING_BCK_IFLE:
+SVM_INSTRUCTION_PROFILING_BCK_IF_ICMPEQ:
+SVM_INSTRUCTION_PROFILING_BCK_IF_ICMPNE:
+SVM_INSTRUCTION_PROFILING_BCK_IF_ICMPLT:
+SVM_INSTRUCTION_PROFILING_BCK_IF_ICMPGE:
+SVM_INSTRUCTION_PROFILING_BCK_IF_ICMPGT:
+SVM_INSTRUCTION_PROFILING_BCK_IF_ICMPLE:
+SVM_INSTRUCTION_PROFILING_BCK_IF_ACMPEQ:
+SVM_INSTRUCTION_PROFILING_BCK_IF_ACMPNE:
+SVM_INSTRUCTION_PROFILING_BCK_IFNULL:
+SVM_INSTRUCTION_PROFILING_BCK_IFNONNULL:
+
+SVM_INSTRUCTION_PROFILING_BCK_IFEQ_CHECK:
+SVM_INSTRUCTION_PROFILING_BCK_IFNE_CHECK:
+SVM_INSTRUCTION_PROFILING_BCK_IFLT_CHECK:
+SVM_INSTRUCTION_PROFILING_BCK_IFGE_CHECK:
+SVM_INSTRUCTION_PROFILING_BCK_IFGT_CHECK:
+SVM_INSTRUCTION_PROFILING_BCK_IFLE_CHECK:
+SVM_INSTRUCTION_PROFILING_BCK_IF_ICMPEQ_CHECK:
+SVM_INSTRUCTION_PROFILING_BCK_IF_ICMPNE_CHECK:
+SVM_INSTRUCTION_PROFILING_BCK_IF_ICMPLT_CHECK:
+SVM_INSTRUCTION_PROFILING_BCK_IF_ICMPGE_CHECK:
+SVM_INSTRUCTION_PROFILING_BCK_IF_ICMPGT_CHECK:
+SVM_INSTRUCTION_PROFILING_BCK_IF_ICMPLE_CHECK:
+SVM_INSTRUCTION_PROFILING_BCK_IF_ACMPEQ_CHECK:
+SVM_INSTRUCTION_PROFILING_BCK_IF_ACMPNE_CHECK:
+SVM_INSTRUCTION_PROFILING_BCK_IFNULL_CHECK:
+SVM_INSTRUCTION_PROFILING_BCK_IFNONNULL_CHECK:
+
+param_x: ???????????
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_PROFILING_INVOKESPECIAL:
+SVM_INSTRUCTION_PROFILING_INVOKESTATIC:
+
+param_1: (jint) number of invokations
+param_2: (jint) args_count
+param_3: (_svmt_method_info*) @method_info	
+param_4: (stack_gc_map*) @stack_gc_map
+
+---------------------------------------------------------------------------
+
+SVM_INSTRUCTION_PROFILING_INVOKEINTERFACE:
+SVM_INSTRUCTION_PROFILING_INVOKEVIRTUAL:
+
+param_1: (_svmt_method_invoke_info*) @method_invoke_info
+param_2: (jint) args_count	 
+param_3: (size_t) method_offset 
+param_4: (stack_gc_map*) @stack_gc_map
+

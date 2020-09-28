@@ -1,0 +1,18 @@
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * This source file is part of SableVM.                            *
+ *                                                                 *
+ * See the file "LICENSE" for the copyright information and for    *
+ * the terms and conditions for copying, distribution and          *
+ * modification of this source file.                               *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+/* library typedefs */
+
+-T FILE
+-T ptrdiff_t
+-T size_t
+-T va_list
+-T JNIEXPORT
+-T JNICALL
+
+/* SableVM's typedefs */

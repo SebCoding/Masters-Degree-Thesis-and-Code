@@ -1,0 +1,152 @@
+Subject: SableVM x.y Released
+
+The developers of the SableVM Project are proud to announce the
+official release of SableVM x.y.  SableVM is a liberally licensed
+virtual machine.  See the "About SableVM" section below for more
+informations about SableVM.
+
+Here is a list of the most important changes and new features.  In
+this version, we:
+
+PUT THE RELEVANT PART OF THE "NEWS" FILE HERE
+
+
+=== ABOUT SABLEVM ===
+
+SableVM is a robust, extremely portable, efficient, and
+specifications-compliant virtual machine that aims to be easy to
+maintain and to extend.  It features a state-of-the-art and efficient
+interpreter engine.  Its source code is very accessible and easy to
+understand.  It also has many robustness features that have been the
+object of careful design.
+
+SableVM is a clean-room implementation of the publicly available
+specifications.
+
+SableVM is licensed under the terms of the GNU Lesser General Public
+License (LGPL).  It also uses a modified version of GNU Classpath
+called sablevm-classpath which is licensed under the terms of the GNU
+General Public License (GPL) with a linking exception.
+
+The license of SableVM (LGPL) was specifically chosen as to maximize
+your ability to legally link and run popular applications, such as
+Eclipse (http://eclipse.org) and Ant (http://ant.apache.org), which
+are licensed in ways which might conflict with the terms of the GNU
+General Public License (GPL).  See the the following link for more
+information:
+
+  http://sablevm.org/wiki/License_FAQ
+
+The SableVM web site is located at:
+
+  http://sablevm.org
+
+
+=== INSTALLATION FROM SOURCE ===
+
+SableVM is available to download at:
+
+  http://sablevm.org/download/release/
+
+You must download and later install *both*:
+
+- sablevm-x.y.tar.gz
+- sablevm-classpath-x.y.tar.gz.
+
+See the INSTALL file included in the sablevm-x.y.tar.gz archive for
+build environment requirements and installation procedures.
+
+We make frequent releases, but we also provide daily snapshots of the
+source code repository trunk at:
+
+  http://sablevm.org/download/snapshot/
+
+Note that the code of this trunk is more robust than the code usually
+found in the CVS trunk of many other free software projects.  The
+trunk only contains code that has been first tested by developers
+within their own sandboxes.  A detailed explanation of the different
+development branches is available at:
+
+  http://sablevm.org/wiki/Development_Branches
+
+
+=== NOTES ===
+
+We appreciate your feedback.  Please feel invited to contact us.  See:
+
+  http://sablevm.org/support.html
+
+You can also join us in real-time on the #sablevm IRC channel on
+irc.sablevm.org (alias: irc.freenode.net, irc.debian.org).
+
+
+=== BINARY PACKAGES ===
+
+Binary packages of new SableVM versions are usually available in the
+GNU/Linux Debian "unstable" distribution shortly after the official
+release.  These packages normally migrate to the "testing"
+distribution a few weeks later.
+
+Some other GNU/Linux distributions (Gentoo, etc.) and other operating
+systems (*BSD, etc.) also provide binary packages or a convenient
+build environment to compile and install sablevm.  For details see:
+
+  http://sablevm.org/download.html
+
+
+=== DEVELOPMENT OF SABLEVM ===
+
+If you would like to help developing SableVM please join us!  For all
+interested we provide a very comfortable environment:
+
+* Subversion accounts
+
+  We provide accounts in our Subversion repository for developers who
+  want to work collaboratively on improving SableVM or its class
+  libraries.  If you want to join, you should simply ask us for a
+  subversion account on the development mailing list
+  <sablevm-devel@sablevm.org>.
+
+  Subversion is an improved CVS that takes approximately 10 minutes to
+  learn for a person familiar with CVS.
+
+* Very frequent updates from upstream GNU Classpath CVS repository
+
+  The trunk of sablevm-classpath is synchronized with the GNU
+  Classpath CVS trunk every few days.
+
+* Private sandbox for each developer
+
+  Each developer is given full access to his own "sandbox" to create
+  private development branches (as they're nearly 0-cost to create in
+  Subversion).  So each developer's development doesn't interfere with
+  other developers.  Each developer can also create private "tags" on
+  any code in Subversion.  These tags are publicly available via the
+  Web interface at:
+
+  http://sablevm.org/svn/developers/
+
+* No copyright assignment requirement
+
+  We accept contributions without asking for copyright assignment for
+  developers.  Our contribution policy is available at:
+
+http://sablevm.org/svn/repository/sablevm/trunk/doc/contribution_policy.txt
+
+
+=== Additional Information ===
+
+You will find a wealth of additional information in SableVM's wiki
+pages at:
+
+  http://sablevm.org/wiki/
+
+
+=== CONCLUSION ===
+
+We wish you great fun using SableVM.
+
+Enjoy!
+
+
+        The SableVM Project developers
