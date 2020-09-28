@@ -1,2 +1,2 @@
 # Masters-Degree-Thesis-and-Code
-Master's degree thesis and source code.
+Dynamic profiling and inlining of methods inside the Java Virtual Machine SableVM.
